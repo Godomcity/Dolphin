@@ -13,12 +13,11 @@ local TeleportService    = game:GetService("TeleportService")
 
 local sessionResume = require(script.Parent:WaitForChild("Modules"):WaitForChild("SessionResume"))
 local hubStartState = require(script.Parent:WaitForChild("Modules"):WaitForChild("HubStartState"))
+local StageRolePolicy = require(RS:WaitForChild("Modules"):WaitForChild("StageRolePolicy"))
 
 ----------------------------------------------------------------
 -- 설정
 ----------------------------------------------------------------
-local TEACHER_USER_ID = 2783482612
-
 -- ✅ 허브에서 퀴즈 시작 때 저장했던 stage 값
 local QUIZ_START_STAGE_INDEX = 1
 
@@ -86,8 +85,8 @@ end
 -- 유틸
 ----------------------------------------------------------------
 local function isTeacher(plr: Player): boolean
-	if RunService:IsStudio() then return true end
-	return plr.UserId == TEACHER_USER_ID
+if RunService:IsStudio() then return true end
+return StageRolePolicy.IsTeacher(plr)
 end
 
 local function getSessionIdFromPlayer(plr: Player): string?
@@ -248,10 +247,10 @@ RE_FinalJumpEnter.OnServerEvent:Connect(function(plr: Player, payload: any)
 	payload = typeof(payload) == "table" and payload or {}
 
 	-- 선생님은 완주 카운트 제외
-	if plr.UserId ~= TEACHER_USER_ID then
-		if not entered[plr] then
-			entered[plr] = true
-			enterCount += 1
+if not StageRolePolicy.IsTeacher(plr) then
+if not entered[plr] then
+entered[plr] = true
+enterCount += 1
 		end
 	end
 

@@ -3,8 +3,10 @@
 
 local Players = game:GetService("Players")
 local TeleportService = game:GetService("TeleportService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local RoleConfig = require(script.Parent:WaitForChild("RoleConfig"))
+local StageRolePolicy = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("StageRolePolicy"))
+local Roles = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Roles"))
 
 local function applyFromTeleportData(player: Player, td: table)
 	if not td then return end
@@ -23,13 +25,16 @@ local function applyFromTeleportData(player: Player, td: table)
 end
 
 local function enforceRoleOverride(player: Player)
-	-- ⚠️ API 없을 때는 여기서 최종 결정을 강제
-	if RoleConfig.TEACHER_IDS[player.UserId] then
-		player:SetAttribute("Role", "teacher")
-	else
-		-- 화이트리스트가 아니면 전부 학생으로 고정
-		player:SetAttribute("Role", "student")
-	end
+        local isTeacher = StageRolePolicy.IsTeacher(player)
+
+        if isTeacher then
+                player:SetAttribute("Role", "teacher")
+                player:SetAttribute("userRole", Roles.TEACHER)
+                player:SetAttribute("isTeacher", true)
+        else
+                player:SetAttribute("Role", "student")
+                player:SetAttribute("isTeacher", false)
+        end
 end
 
 Players.PlayerAdded:Connect(function(plr)
