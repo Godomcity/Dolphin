@@ -56,7 +56,7 @@ end
 ----------------------------------------------------------------
 -- 설정
 ----------------------------------------------------------------
-local TEACHER_USER_ID = 2783482612
+local Roles = require(RS:WaitForChild("Modules"):WaitForChild("Roles"))
 
 -- 컷씬 브로드캐스트 채널
 local CUTSCENE_CHANNEL_FINAL = "FinalCutscene_Global_v1"
@@ -77,8 +77,15 @@ local REASON_FINAL = "final_zone"
 local alreadyHandled: {[string]: boolean} = {}
 
 local function isTeacher(plr: Player): boolean
-	if RunService:IsStudio() then return true end
-	return plr.UserId == TEACHER_USER_ID
+        if RunService:IsStudio() then return true end
+        if not plr then
+                return false
+        end
+        local role = plr:GetAttribute("userRole")
+        if Roles.isTeacherRole(role) then
+                return true
+        end
+        return plr:GetAttribute("isTeacher") == true
 end
 
 local function getSessionIdFrom(plr: Player, payload: any): string?
