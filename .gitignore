@@ -1,10 +1,12 @@
-# rbxl backups / ports
+# Rojo port temp / backups
 places/*/_port/
 places/*/*.rbxl
 places/*/*.rbxlx
 
-# OS/editor
+# OS / editor
 .DS_Store
 Thumbs.db
 .vscode/
 *.log
+
+# Optional (uncomment if you use npm tooling
