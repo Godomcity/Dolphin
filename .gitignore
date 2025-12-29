@@ -1,9 +1,10 @@
-.rokit/
-node_modules/
-*.lock
-*.log
-Thumbs.db
+# rbxl backups / ports
+places/*/_port/
+places/*/*.rbxl
+places/*/*.rbxlx
+
+# OS/editor
 .DS_Store
+Thumbs.db
 .vscode/
-**/*.rbxl
-**/*.rbxlx
+*.log
