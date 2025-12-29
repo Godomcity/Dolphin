@@ -13,8 +13,7 @@ local RS           = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService") -- ★ 슬라이드용
 
 local LP = Players.LocalPlayer
-
-local TEACHER_USERID = 2783482612
+local StageRolePolicy = require(RS:WaitForChild("Modules"):WaitForChild("StageRolePolicy"))
 
 -- ===== 퀘스트 변경 사운드 =====
 local QUEST_CHANGE_SFX_ID = "rbxassetid://7740696902"
@@ -74,9 +73,9 @@ local SLIDE_OFFSET = -1.0        -- 왼쪽 화면 밖에서 시작(-1.0 만큼 �
 
 -- ✅ 선생님은 QuestGui 안 보이게(아예 로직 실행 X)
 do
-	if LP.UserId == TEACHER_USERID then
-		-- Quest 프레임 숨김
-		questRoot.Visible = false
+if StageRolePolicy.IsTeacher(LP) then
+-- Quest 프레임 숨김
+questRoot.Visible = false
 
 		-- 상위 ScreenGui까지 있으면 통째로 끔(더 확실)
 		local gui = root:FindFirstAncestorOfClass("ScreenGui")
