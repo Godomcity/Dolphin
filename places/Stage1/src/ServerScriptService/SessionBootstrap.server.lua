@@ -13,7 +13,7 @@ local SessionResume = require(ServerScriptService:WaitForChild("Modules"):WaitFo
 local playerPassThrough = require(ServerScriptService:WaitForChild("Modules"):WaitForChild("PlayerPassThrough"))
 playerPassThrough.Enable()
 
-local STAGE_NUMBER = 2
+local STAGE_NUMBER = 1
 
 local function getTeleportData(plr: Player): (any, string?)
 local ok, joinData = pcall(function()
