@@ -10,18 +10,18 @@ local Players = game:GetService("Players")
 local player     = Players.LocalPlayer
 local endButton  = script.Parent
 local quizEndGui = endButton:FindFirstAncestorOfClass("ScreenGui")
-
-local TEACHER_USER_ID = 2783482612
+local StageRolePolicy = require(RS:WaitForChild("Modules"):WaitForChild("StageRolePolicy"))
 
 local Remotes     = RS:WaitForChild("Remotes")
 local RE_QuizEnd  = Remotes:WaitForChild("Quiz_EndRequest") :: RemoteEvent
 
 -- 선생님만 버튼 보이기
-if player.UserId ~= TEACHER_USER_ID then
-	if endButton:IsA("GuiObject") then
-		endButton.Visible = false
-	end
-	return
+local isTeacher = StageRolePolicy.IsTeacher(player)
+if not isTeacher then
+        if endButton:IsA("GuiObject") then
+                endButton.Visible = false
+        end
+        return
 end
 
 local isClicked = false
