@@ -12,7 +12,7 @@ local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local TweenService = game:GetService("TweenService")
 
-local TEACHER_USERID = 2783482612
+local Roles = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("Roles"))
 local lp = Players.LocalPlayer
 
 local CLICK_SOUND_ID = "rbxassetid://15675059323"
@@ -24,7 +24,17 @@ local spawnBtn = bg:WaitForChild("SpawnButton") :: GuiButton
 local stopBtn = bg:WaitForChild("StopButton") :: GuiButton
 
 local function isTeacher(): boolean
-	return lp.UserId == TEACHER_USERID
+        local roleAttr = lp:GetAttribute("userRole")
+        if Roles.isTeacherRole(roleAttr) then
+                return true
+        end
+
+        local isTeacherAttr = lp:GetAttribute("isTeacher")
+        if typeof(isTeacherAttr) == "boolean" then
+                return isTeacherAttr
+        end
+
+        return false
 end
 
 local function isPanelOpen(): boolean
@@ -32,8 +42,17 @@ local function isPanelOpen(): boolean
 end
 
 -- 선생님만 UI 보이게
-showBtn.Visible = isTeacher()
-bg.Visible = false
+local function updateVisibility()
+        local teacher = isTeacher()
+        showBtn.Visible = teacher
+        if not teacher then
+                bg.Visible = false
+        end
+end
+
+updateVisibility()
+lp:GetAttributeChangedSignal("userRole"):Connect(updateVisibility)
+lp:GetAttributeChangedSignal("isTeacher"):Connect(updateVisibility)
 
 -- ✅ 패널 Position: 열기 X=2.987, 닫기 X=0 (Y=2.343 고정)
 local Y_SCALE = 2.3
