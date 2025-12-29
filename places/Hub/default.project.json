@@ -1,0 +1,153 @@
+{
+  "name": "Rostar Project",
+  "tree": {
+    "$className": "DataModel",
+    "Chat": {
+      "$path": "DataModel/Chat.rbxm"
+    },
+    "Lighting": {
+      "$path": "DataModel/Lighting.rbxm"
+    },
+    "LocalizationService": {
+      "$path": "DataModel/LocalizationService.rbxm"
+    },
+    "MaterialService": {
+      "$path": "DataModel/MaterialService.rbxm"
+    },
+    "Players": {
+      "$path": "DataModel/Players.rbxm"
+    },
+    "ReplicatedFirst": {
+      "$path": "DataModel/ReplicatedFirst.rbxm"
+    },
+    "ReplicatedStorage": {
+      "$path": "DataModel/ReplicatedStorage.rbxm",
+      "Modules": {
+        "$path": "DataModel/ReplicatedStorage/Modules"
+      },
+      "Stage2Potal": {
+        "$path": "DataModel/ReplicatedStorage/Stage2Potal.rbxm"
+      }
+    },
+    "ServerScriptService": {
+      "$path": "DataModel/ServerScriptService.rbxm",
+      "GameBootstrap": {
+        "$path": "DataModel/ServerScriptService/GameBootstrap"
+      },
+      "HubAutoRouteToStage1": {
+        "$path": "DataModel/ServerScriptService/HubAutoRouteToStage1"
+      },
+      "HubDialogueRouter": {
+        "$path": "DataModel/ServerScriptService/HubDialogueRouter"
+      },
+      "HubQuizStart": {
+        "$path": "DataModel/ServerScriptService/HubQuizStart"
+      },
+      "HubService": {
+        "$path": "DataModel/ServerScriptService/HubService"
+      },
+      "Modules": {
+        "$path": "DataModel/ServerScriptService/Modules"
+      },
+      "PortalMover": {
+        "$path": "DataModel/ServerScriptService/PortalMover"
+      },
+      "PortalUtil": {
+        "$path": "DataModel/ServerScriptService/PortalUtil"
+      },
+      "QuizRunService": {
+        "$path": "DataModel/ServerScriptService/QuizRunService"
+      },
+      "QuizService": {
+        "$path": "DataModel/ServerScriptService/QuizService"
+      },
+      "RemotesBootstrap": {
+        "$path": "DataModel/ServerScriptService/RemotesBootstrap"
+      },
+      "ResultGuiController": {
+        "$path": "DataModel/ServerScriptService/ResultGuiController"
+      },
+      "ResultGuiTrigger": {
+        "$path": "DataModel/ServerScriptService/ResultGuiTrigger"
+      },
+      "RoleConfig": {
+        "$path": "DataModel/ServerScriptService/RoleConfig"
+      },
+      "SessionBootstrap": {
+        "$path": "DataModel/ServerScriptService/SessionBootstrap"
+      },
+      "StageResultBoardService": {
+        "$path": "DataModel/ServerScriptService/StageResultBoardService"
+      },
+      "TeleportRouter": {
+        "$path": "DataModel/ServerScriptService/TeleportRouter"
+      }
+    },
+    "ServerStorage": {
+      "$path": "DataModel/ServerStorage.rbxm"
+    },
+    "SoundService": {
+      "$path": "DataModel/SoundService.rbxm"
+    },
+    "StarterGui": {
+      "$path": "DataModel/StarterGui.rbxm",
+      "ResultGui": {
+        "$path": "DataModel/StarterGui/ResultGui.rbxm"
+      }
+    },
+    "StarterPack": {
+      "$path": "DataModel/StarterPack.rbxm"
+    },
+    "StarterPlayer": {
+      "$path": "DataModel/StarterPlayer.rbxm",
+      "StarterCharacterScripts": {
+        "$path": "DataModel/StarterPlayer/StarterCharacterScripts.rbxm"
+      },
+      "StarterPlayerScripts": {
+        "$path": "DataModel/StarterPlayer/StarterPlayerScripts.rbxm",
+        "CutsceneClient": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/CutsceneClient"
+        },
+        "HubDialogueCutscene": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/HubDialogueCutscene"
+        },
+        "HubDialoguePromptClient": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/HubDialoguePromptClient"
+        },
+        "HubPortalCutsceneBoot": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/HubPortalCutsceneBoot"
+        },
+        "HubRouter": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/HubRouter"
+        },
+        "QuizClient": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/QuizClient"
+        },
+        "QuizHUD": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/QuizHUD"
+        },
+        "TeacherHubUI": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/TeacherHubUI"
+        }
+      }
+    },
+    "TestService": {
+      "$path": "DataModel/TestService.rbxm"
+    },
+    "Workspace": {
+      "$path": "DataModel/Workspace.rbxm",
+      "Character": {
+        "$path": "DataModel/Workspace/Character.rbxm"
+      },
+      "HubPortal": {
+        "$path": "DataModel/Workspace/HubPortal.rbxm"
+      },
+      "Level": {
+        "$path": "DataModel/Workspace/Level.rbxm"
+      },
+      "Path": {
+        "$path": "DataModel/Workspace/Path.rbxm"
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+.rokit/
+node_modules/
+*.lock
+*.log
+Thumbs.db
+.DS_Store
+.vscode/
+**/*.rbxl
+**/*.rbxlx

@@ -1,0 +1,240 @@
+{
+  "name": "Rostar Project",
+  "tree": {
+    "$className": "DataModel",
+    "Chat": {
+      "$path": "DataModel/Chat.rbxm"
+    },
+    "Lighting": {
+      "$path": "DataModel/Lighting.rbxm"
+    },
+    "LocalizationService": {
+      "$path": "DataModel/LocalizationService.rbxm"
+    },
+    "MaterialService": {
+      "$path": "DataModel/MaterialService.rbxm"
+    },
+    "Players": {
+      "$path": "DataModel/Players.rbxm"
+    },
+    "ReplicatedFirst": {
+      "$path": "DataModel/ReplicatedFirst.rbxm",
+      "QuizHudBus": {
+        "$path": "DataModel/ReplicatedFirst/QuizHudBus"
+      }
+    },
+    "ReplicatedStorage": {
+      "$path": "DataModel/ReplicatedStorage.rbxm",
+      "Box": {
+        "$path": "DataModel/ReplicatedStorage/Box.rbxm"
+      },
+      "DialogueData": {
+        "$path": "DataModel/ReplicatedStorage/DialogueData"
+      },
+      "Modules": {
+        "$path": "DataModel/ReplicatedStorage/Modules"
+      },
+      "PortalMover": {
+        "$path": "DataModel/ReplicatedStorage/PortalMover"
+      },
+      "Potal": {
+        "$path": "DataModel/ReplicatedStorage/Potal.rbxm"
+      },
+      "SeaShell": {
+        "$path": "DataModel/ReplicatedStorage/SeaShell.rbxm"
+      }
+    },
+    "ServerScriptService": {
+      "$path": "DataModel/ServerScriptService.rbxm",
+      "DialogLeafThenPrompt": {
+        "$path": "DataModel/ServerScriptService/DialogLeafThenPrompt"
+      },
+      "FinalTeleportToLobby": {
+        "$path": "DataModel/ServerScriptService/FinalTeleportToLobby"
+      },
+      "FinalZoneCutsceneService": {
+        "$path": "DataModel/ServerScriptService/FinalZoneCutsceneService"
+      },
+      "GameBootstrap": {
+        "$path": "DataModel/ServerScriptService/GameBootstrap"
+      },
+      "Modules": {
+        "$path": "DataModel/ServerScriptService/Modules"
+      },
+      "PortalUtil": {
+        "$path": "DataModel/ServerScriptService/PortalUtil"
+      },
+      "QuizApiService": {
+        "$path": "DataModel/ServerScriptService/QuizApiService"
+      },
+      "QuizApiService(server)": {
+        "$path": "DataModel/ServerScriptService/QuizApiService(server)"
+      },
+      "QuizCutsceneBridge": {
+        "$path": "DataModel/ServerScriptService/QuizCutsceneBridge"
+      },
+      "QuizRemoteService": {
+        "$path": "DataModel/ServerScriptService/QuizRemoteService"
+      },
+      "QuizService": {
+        "$path": "DataModel/ServerScriptService/QuizService"
+      },
+      "QuizService(SS)": {
+        "$path": "DataModel/ServerScriptService/QuizService(SS)"
+      },
+      "RoleConfig": {
+        "$path": "DataModel/ServerScriptService/RoleConfig"
+      },
+      "SessionBootstrap": {
+        "$path": "DataModel/ServerScriptService/SessionBootstrap"
+      },
+      "Stage3ProgressService": {
+        "$path": "DataModel/ServerScriptService/Stage3ProgressService"
+      },
+      "StageQuizResultService": {
+        "$path": "DataModel/ServerScriptService/StageQuizResultService"
+      },
+      "TeacherControl": {
+        "$path": "DataModel/ServerScriptService/TeacherControl"
+      },
+      "TeleportOnPrompt": {
+        "$path": "DataModel/ServerScriptService/TeleportOnPrompt"
+      },
+      "TeleportRouter": {
+        "$path": "DataModel/ServerScriptService/TeleportRouter"
+      }
+    },
+    "ServerStorage": {
+      "$path": "DataModel/ServerStorage.rbxm",
+      "Potal": {
+        "$path": "DataModel/ServerStorage/Potal.rbxm"
+      }
+    },
+    "SoundService": {
+      "$path": "DataModel/SoundService.rbxm"
+    },
+    "StarterGui": {
+      "$path": "DataModel/StarterGui.rbxm",
+      "GuideGui": {
+        "$path": "DataModel/StarterGui/GuideGui.rbxm"
+      },
+      "HUDGui": {
+        "$path": "DataModel/StarterGui/HUDGui.rbxm"
+      },
+      "QuestGui": {
+        "$path": "DataModel/StarterGui/QuestGui.rbxm"
+      },
+      "QuizEnd": {
+        "$path": "DataModel/StarterGui/QuizEnd.rbxm"
+      },
+      "QuizGui": {
+        "$path": "DataModel/StarterGui/QuizGui.rbxm"
+      }
+    },
+    "StarterPack": {
+      "$path": "DataModel/StarterPack.rbxm"
+    },
+    "StarterPlayer": {
+      "$path": "DataModel/StarterPlayer.rbxm",
+      "StarterCharacterScripts": {
+        "$path": "DataModel/StarterPlayer/StarterCharacterScripts.rbxm"
+      },
+      "StarterPlayerScripts": {
+        "$path": "DataModel/StarterPlayer/StarterPlayerScripts.rbxm",
+        "CutsceneClient": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/CutsceneClient"
+        },
+        "DialogueUI": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/DialogueUI"
+        },
+        "FinalZoneBeamClient": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/FinalZoneBeamClient"
+        },
+        "InteractionQuizBridge": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/InteractionQuizBridge"
+        },
+        "PortalCutsceneTest": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/PortalCutsceneTest"
+        },
+        "QuestArrowGuide": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/QuestArrowGuide"
+        },
+        "QuizClient": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/QuizClient"
+        },
+        "QuizHUD": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/QuizHUD"
+        },
+        "Stage1Next": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/Stage1Next"
+        },
+        "StageTeacherSkip_Stage3": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/StageTeacherSkip_Stage3"
+        },
+        "TeacherLockClient": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/TeacherLockClient"
+        },
+        "TeleportPromptClient": {
+          "$path": "DataModel/StarterPlayer/StarterPlayerScripts/TeleportPromptClient"
+        }
+      }
+    },
+    "TestService": {
+      "$path": "DataModel/TestService.rbxm"
+    },
+    "Workspace": {
+      "$path": "DataModel/Workspace.rbxm",
+      "Decal": {
+        "$path": "DataModel/Workspace/Decal.rbxm"
+      },
+      "FinalZone": {
+        "$path": "DataModel/Workspace/FinalZone.rbxm",
+        "Character": {
+          "$path": "DataModel/Workspace/FinalZone/Character.rbxm"
+        },
+        "Coral_Portal": {
+          "$path": "DataModel/Workspace/FinalZone/Coral_Portal.rbxm"
+        },
+        "Deco": {
+          "$path": "DataModel/Workspace/FinalZone/Deco.rbxm",
+          "BubbleEffect": {
+            "$path": "DataModel/Workspace/FinalZone/Deco/BubbleEffect.rbxm"
+          },
+          "Grass": {
+            "$path": "DataModel/Workspace/FinalZone/Deco/Grass.rbxm"
+          },
+          "JellyFishes": {
+            "$path": "DataModel/Workspace/FinalZone/Deco/JellyFishes.rbxm"
+          },
+          "Rock": {
+            "$path": "DataModel/Workspace/FinalZone/Deco/Rock.rbxm"
+          },
+          "fence": {
+            "$path": "DataModel/Workspace/FinalZone/Deco/fence.rbxm"
+          }
+        }
+      },
+      "Objects": {
+        "$path": "DataModel/Workspace/Objects.rbxm",
+        "Oil": {
+          "$path": "DataModel/Workspace/Objects/Oil.rbxm"
+        },
+        "SeaShell": {
+          "$path": "DataModel/Workspace/Objects/SeaShell.rbxm"
+        }
+      },
+      "Stage3": {
+        "$path": "DataModel/Workspace/Stage3.rbxm",
+        "Folder": {
+          "$className": "Folder",
+          "Deco": {
+            "$path": "DataModel/Workspace/Stage3/Folder/Deco.rbxm"
+          }
+        },
+        "JellyFish": {
+          "$path": "DataModel/Workspace/Stage3/JellyFish.rbxm"
+        }
+      }
+    }
+  }
+}
