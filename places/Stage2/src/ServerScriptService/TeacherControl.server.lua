@@ -7,10 +7,10 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local TEACHER_USERID = 2783482612
+local StageRolePolicy = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("StageRolePolicy"))
 
 local function isTeacher(plr: Player): boolean
-	return plr.UserId == TEACHER_USERID
+        return StageRolePolicy.IsTeacher(plr)
 end
 
 -- Remotes 폴더 보장
