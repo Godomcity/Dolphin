@@ -5,7 +5,7 @@
 local Players = game:GetService("Players")
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 
-local TEACHER_USERID = 2783482612
+local StageRolePolicy = require(ReplicatedStorage:WaitForChild("Modules"):WaitForChild("StageRolePolicy"))
 local lp = Players.LocalPlayer
 
 local PlayerLock2 = require(ReplicatedStorage.Modules.PlayerLock)
@@ -14,8 +14,8 @@ local Remotes = ReplicatedStorage:WaitForChild("Remotes")
 local RE_Lock = Remotes:WaitForChild("Teacher_ClientLock")
 
 RE_Lock.OnClientEvent:Connect(function(shouldLock: boolean)
-	-- 선생님은 항상 제외
-	if lp.UserId == TEACHER_USERID then return end
+-- 선생님은 항상 제외
+if StageRolePolicy.IsTeacher(lp) then return end
 
 	if shouldLock then
 		PlayerLock2.Lock({

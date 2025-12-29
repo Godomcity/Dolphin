@@ -19,6 +19,7 @@ local RunService       = game:GetService("RunService")
 
 local sessionResume = require(script.Parent:WaitForChild("Modules"):WaitForChild("SessionResume"))
 local hubStartState = require(script.Parent:WaitForChild("Modules"):WaitForChild("HubStartState"))
+local StageRolePolicy = require(RS:WaitForChild("Modules"):WaitForChild("StageRolePolicy"))
 ----------------------------------------------------------------
 -- Remotes 보장
 ----------------------------------------------------------------
@@ -56,8 +57,6 @@ end
 ----------------------------------------------------------------
 -- 설정
 ----------------------------------------------------------------
-local TEACHER_USER_ID = 2783482612
-
 -- 컷씬 브로드캐스트 채널
 local CUTSCENE_CHANNEL_FINAL = "FinalCutscene_Global_v1"
 local CUTSCENE_CHANNEL_QUIZ  = "QuizEnd_Global_v1"
@@ -78,7 +77,7 @@ local alreadyHandled: {[string]: boolean} = {}
 
 local function isTeacher(plr: Player): boolean
 	if RunService:IsStudio() then return true end
-	return plr.UserId == TEACHER_USER_ID
+	return StageRolePolicy.IsTeacher(plr)
 end
 
 local function getSessionIdFrom(plr: Player, payload: any): string?
@@ -260,7 +259,7 @@ RE_QuizEnd.OnServerEvent:Connect(function(plr: Player, payload: any)
 
 	-- (C) 텔레포트 브로드캐스트 딱 1번
 	broadcastTeleportOnce(sid, REASON_FINAL, QUIZ_ENDING_SEC)
-	sessionResume.ClearSession(sid)
+	--sessionResume.ClearSession(sid)
 	hubStartState.Clear(sid)
 end)
 
