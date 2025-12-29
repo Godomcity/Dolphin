@@ -56,7 +56,7 @@ end
 ----------------------------------------------------------------
 -- 설정
 ----------------------------------------------------------------
-local TEACHER_USER_ID = 2783482612
+local Roles = require(RS:WaitForChild("Modules"):WaitForChild("Roles"))
 
 -- 컷씬 브로드캐스트 채널
 local CUTSCENE_CHANNEL_FINAL = "FinalCutscene_Global_v1"
@@ -77,19 +77,30 @@ local REASON_FINAL = "final_zone"
 local alreadyHandled: {[string]: boolean} = {}
 
 local function isTeacher(plr: Player): boolean
-	if RunService:IsStudio() then return true end
-	return plr.UserId == TEACHER_USER_ID
+        if RunService:IsStudio() then return true end
+
+        local roleAttr = plr:GetAttribute("userRole")
+        if Roles.isTeacherRole(roleAttr) then
+                return true
+        end
+
+        local isTeacherAttr = plr:GetAttribute("isTeacher")
+        if typeof(isTeacherAttr) == "boolean" then
+                return isTeacherAttr
+        end
+
+        return false
 end
 
 local function getSessionIdFrom(plr: Player, payload: any): string?
-	if typeof(payload) == "table" and typeof(payload.sessionId) == "string" and #payload.sessionId > 0 then
-		return payload.sessionId
-	end
-	local sid = plr:GetAttribute("sessionId")
-	if typeof(sid) == "string" and #sid > 0 then
-		return sid
-	end
-	return nil
+        if typeof(payload) == "table" and typeof(payload.sessionId) == "string" and #payload.sessionId > 0 then
+                return payload.sessionId
+        end
+        local sid = plr:GetAttribute("sessionId")
+        if typeof(sid) == "string" and #sid > 0 then
+                return sid
+        end
+        return nil
 end
 
 local function hasSessionPlayerHere(sessionId: string): boolean
