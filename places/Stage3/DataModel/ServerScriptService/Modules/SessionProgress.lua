@@ -1,3 +1,4 @@
+-- ServerScriptService/Modules/SessionProgress.lua
 --!strict
 -- ★ 플레이어별 진행도 저장되는 버전 (sessionId + userId 조합 key)
 -- ★ DataStore 기반 (세션/개인 단위로 퀘스트/퀴즈/컷씬/삭제 오브젝트 저장)
@@ -30,7 +31,11 @@ local M = {}
 
 local _sessions: {[string]: SessionData} = {}
 
+local STAGE1 = 1
+local STAGE2 = 2
 local STAGE3 = 3
+local STAGE4 = 4
+local STAGE5 = 5
 
 -----------------------------------------------------
 -- progressKey = sessionId:u<userId>
@@ -66,8 +71,7 @@ local function ensureSession(key: string): SessionData
 	else
 		sess = {
 			id = key,
-			-- ★ Stage3 플레이스이므로 기본 currentStage = 3
-			currentStage = STAGE3,
+			currentStage = 1,
 			stages = {},
 			createdAt = os.time(),
 			updatedAt = os.time(),
@@ -93,40 +97,41 @@ end
 -----------------------------------------------------
 local function ensureStage(sess: SessionData, stage: number): StageData
 	local st = sess.stages[stage]
-	if not st then
-		st = {
-			quizSolved     = {},
-			cutscenes      = {},
-			questPhase     = 0,
-			extraTrash     = 0,
-			cleanedObjects = {},
 
-			-- ★ 새 필드 기본값
-			quizScore   = 0,
+	if not st then
+		-- ★ 신규 생성
+		st = {
+			quizSolved = {},
+			cutscenes = {},
+			questPhase = 0,
+			extraTrash = 0,
+			cleanedObjects = {},
+			quizScore = 0,
 			quizTimeSec = 0,
 		}
 		sess.stages[stage] = st
 	else
-		-- ★ 옛 데이터 방어: 필드가 없으면 기본값 채워주기
-		if st.quizScore == nil then
-			st.quizScore = 0
-		end
-		if st.quizTimeSec == nil then
-			st.quizTimeSec = 0
-		end
+		-- ★ 예전에 저장된 데이터 호환용(필드 없으면 기본값 세팅)
+		st.quizSolved = st.quizSolved or {}
+		st.cutscenes = st.cutscenes or {}
+		st.cleanedObjects = st.cleanedObjects or {}
+		st.questPhase = st.questPhase or 0
+		st.extraTrash = st.extraTrash or 0
+		st.quizScore = st.quizScore or 0
+		st.quizTimeSec = st.quizTimeSec or 0
 	end
+
 	return st
 end
 
 local function emptyStage(): StageData
 	return {
-		quizSolved     = {},
-		cutscenes      = {},
-		questPhase     = 0,
-		extraTrash     = 0,
+		quizSolved = {},
+		cutscenes = {},
+		questPhase = 0,
+		extraTrash = 0,
 		cleanedObjects = {},
-
-		quizScore   = 0,
+		quizScore = 0,
 		quizTimeSec = 0,
 	}
 end
@@ -138,6 +143,22 @@ function M.MarkQuizSolved(key: string, stage: number, qid: string)
 	local sess = ensureSession(key)
 	local st = ensureStage(sess, stage)
 	st.quizSolved[qid] = true
+	saveSession(key)
+end
+
+-----------------------------------------------------
+-- ★ 추가 API: 퀴즈 점수/시간
+-----------------------------------------------------
+function M.SetQuizRuntime(key: string, stage: number, score: number, timeSec: number)
+	local sess = ensureSession(key)
+	local st = ensureStage(sess, stage)
+
+	local nScore = math.max(0, math.floor(score))
+	local nTime  = math.max(0, math.floor(timeSec))
+
+	st.quizScore = nScore
+	st.quizTimeSec = nTime
+
 	saveSession(key)
 end
 
@@ -179,22 +200,6 @@ function M.MarkObjectCleaned(key: string, stage: number, objectId: string)
 end
 
 -----------------------------------------------------
--- ★ API: 퀴즈 점수/시간 기록
------------------------------------------------------
-function M.SetQuizResult(key: string, stage: number, score: number, timeSec: number)
-	local sess = ensureSession(key)
-	local st = ensureStage(sess, stage)
-
-	local nScore   = tonumber(score)   or 0
-	local nTimeSec = tonumber(timeSec) or 0
-
-	st.quizScore   = math.max(0, nScore)
-	st.quizTimeSec = math.max(0, nTimeSec)
-
-	saveSession(key)
-end
-
------------------------------------------------------
 -- StageProgress DTO
 -----------------------------------------------------
 function M.GetStageProgress(key: string, stage: number): StageData
@@ -205,48 +210,59 @@ function M.GetStageProgress(key: string, stage: number): StageData
 	if not st then
 		return emptyStage()
 	end
-
-	-- 옛 데이터 보정
-	if st.quizScore == nil then
-		st.quizScore = 0
-	end
-	if st.quizTimeSec == nil then
-		st.quizTimeSec = 0
-	end
-
-	return st
+	-- ensureStage 로 필드 채운 상태 보장하고 싶으면:
+	return ensureStage(sess, stage)
 end
 
 -----------------------------------------------------
--- Stage3 전용 (Player 기반)
+-- Stage1 전용 (Player 기반)
 -----------------------------------------------------
+local function getStageStateForPlayer(plr: Player, stage: number): StageData
+        local key = keyFromPlayer(plr)
+        if not key then
+                return emptyStage()
+        end
+        return M.GetStageProgress(key, stage)
+end
+
+function M.GetStage1State(plr: Player): StageData
+        return getStageStateForPlayer(plr, STAGE1)
+end
+
+function M.GetStage2State(plr: Player): StageData
+        return getStageStateForPlayer(plr, STAGE2)
+end
+
 function M.GetStage3State(plr: Player): StageData
-	local key = keyFromPlayer(plr)
-	if not key then
-		return emptyStage()
-	end
-	return M.GetStageProgress(key, STAGE3)
+        return getStageStateForPlayer(plr, STAGE3)
+end
+
+function M.GetStage4State(plr: Player): StageData
+        return getStageStateForPlayer(plr, STAGE4)
+end
+
+function M.GetStage5State(plr: Player): StageData
+        return getStageStateForPlayer(plr, STAGE5)
 end
 
 function M.SetQuestState(plr: Player, phase: number, extra: number)
 	local key = keyFromPlayer(plr)
 	if not key then return end
-	M.SetQuestPhase(key, STAGE3, phase)
-	M.SetExtraTrash(key, STAGE3, extra)
+	M.SetQuestPhase(key, STAGE1, phase)
+	M.SetExtraTrash(key, STAGE1, extra)
 end
 
 function M.SetCutsceneFlag(plr: Player, flag: string)
 	local key = keyFromPlayer(plr)
 	if not key then return end
-	M.MarkCutscenePlayed(key, STAGE3, flag)
+	M.MarkCutscenePlayed(key, STAGE1, flag)
 end
 
--- ★ 필요하면 StageQuizResultService 쪽에서 이 함수를 호출해서
---   Stage3의 총 점수/시간을 DataStore에 같이 남길 수 있음.
-function M.SetQuizResultForStage3(plr: Player, score: number, timeSec: number)
+-- (필요하면 나중에 편하게 쓰라고 Stage1 전용 helper도 추가 가능)
+function M.SetStage1QuizRuntime(plr: Player, score: number, timeSec: number)
 	local key = keyFromPlayer(plr)
 	if not key then return end
-	M.SetQuizResult(key, STAGE3, score, timeSec)
+	M.SetQuizRuntime(key, STAGE1, score, timeSec)
 end
 
 return M

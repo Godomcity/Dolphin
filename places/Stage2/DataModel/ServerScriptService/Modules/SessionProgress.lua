@@ -31,7 +31,11 @@ local M = {}
 
 local _sessions: {[string]: SessionData} = {}
 
-local STAGE1 = 2
+local STAGE1 = 1
+local STAGE2 = 2
+local STAGE3 = 3
+local STAGE4 = 4
+local STAGE5 = 5
 
 -----------------------------------------------------
 -- progressKey = sessionId:u<userId>
@@ -213,12 +217,32 @@ end
 -----------------------------------------------------
 -- Stage1 전용 (Player 기반)
 -----------------------------------------------------
+local function getStageStateForPlayer(plr: Player, stage: number): StageData
+        local key = keyFromPlayer(plr)
+        if not key then
+                return emptyStage()
+        end
+        return M.GetStageProgress(key, stage)
+end
+
 function M.GetStage1State(plr: Player): StageData
-	local key = keyFromPlayer(plr)
-	if not key then
-		return emptyStage()
-	end
-	return M.GetStageProgress(key, STAGE1)
+        return getStageStateForPlayer(plr, STAGE1)
+end
+
+function M.GetStage2State(plr: Player): StageData
+        return getStageStateForPlayer(plr, STAGE2)
+end
+
+function M.GetStage3State(plr: Player): StageData
+        return getStageStateForPlayer(plr, STAGE3)
+end
+
+function M.GetStage4State(plr: Player): StageData
+        return getStageStateForPlayer(plr, STAGE4)
+end
+
+function M.GetStage5State(plr: Player): StageData
+        return getStageStateForPlayer(plr, STAGE5)
 end
 
 function M.SetQuestState(plr: Player, phase: number, extra: number)
